@@ -4,3 +4,30 @@ bundle
 
 rails g cancan:ability
 
+class Ability
+  include CanCan::Ability
+
+  def initialize(user)
+    # Define abilities for the passed in user here. For example:
+    #
+    user ||= User.new # guest user (not logged in)
+    if user.admin?
+      can :manage, :all
+    else
+      can [:read, :create], Advert
+
+      can :update, Advert do |advert|
+        advert.user == user
+      end
+    end
+end
+
+Controller:
+
+load_and_authorize_resource
+
+Views:
+
+<td><%= link_to 'Edit', edit_advert_path(advert) if can? :update, advert %></td>
+    <td><%= link_to 'Destroy', advert, method: :delete, data: { confirm: 'Are you sure?' }  if can? :delete, advert %></td>
+

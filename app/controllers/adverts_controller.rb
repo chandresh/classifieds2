@@ -1,49 +1,33 @@
 class AdvertsController < ApplicationController
+
+  load_and_authorize_resource
+
   # GET /adverts
   # GET /adverts.json
   def index
-    @adverts = Advert.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @adverts }
-    end
   end
 
   # GET /adverts/1
   # GET /adverts/1.json
   def show
-    @advert = Advert.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @advert }
-    end
   end
 
   # GET /adverts/new
   # GET /adverts/new.json
   def new
-
-    @advert = current_user.adverts.new
-
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @advert }
-    end
+    @advert.user = current_user
   end
 
   # GET /adverts/1/edit
   def edit
-    @advert = Advert.find(params[:id])
+
   end
 
   # POST /adverts
   # POST /adverts.json
   def create
-    @advert = current_user.adverts.new(params[:advert])
 
+    @advert.user = current_user
     respond_to do |format|
       if @advert.save
         format.html { redirect_to @advert, notice: 'Advert was successfully created.' }
@@ -58,7 +42,7 @@ class AdvertsController < ApplicationController
   # PUT /adverts/1
   # PUT /adverts/1.json
   def update
-    @advert = Advert.find(params[:id])
+
 
     respond_to do |format|
       if @advert.update_attributes(params[:advert])
@@ -74,7 +58,7 @@ class AdvertsController < ApplicationController
   # DELETE /adverts/1
   # DELETE /adverts/1.json
   def destroy
-    @advert = Advert.find(params[:id])
+
     @advert.destroy
 
     respond_to do |format|

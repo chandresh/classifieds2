@@ -16,8 +16,8 @@
     <td><%= advert.description %></td>
     <td><%= advert.slug %></td>
     <td><%= link_to 'Show', advert %></td>
-    <td><%= link_to 'Edit', edit_advert_path(advert) %></td>
-    <td><%= link_to 'Destroy', advert, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Edit', edit_advert_path(advert) if can? :update, advert %></td>
+    <td><%= link_to 'Destroy', advert, method: :delete, data: { confirm: 'Are you sure?' }  if can? :delete, advert %></td>
   </tr>
 <% end %>
 </table>
