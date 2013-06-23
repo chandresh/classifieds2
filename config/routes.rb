@@ -4,6 +4,13 @@ Classifieds2::Application.routes.draw do
 
   resources :adverts
   root :to => 'adverts#index'
+
+  controller :session do
+    get 'login' => :new
+    post 'login' => :create
+    get 'logout' => :destroy
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

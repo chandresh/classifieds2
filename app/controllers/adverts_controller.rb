@@ -24,7 +24,9 @@ class AdvertsController < ApplicationController
   # GET /adverts/new
   # GET /adverts/new.json
   def new
-    @advert = Advert.new
+
+    @advert = current_user.adverts.new
+
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,7 +42,7 @@ class AdvertsController < ApplicationController
   # POST /adverts
   # POST /adverts.json
   def create
-    @advert = Advert.new(params[:advert])
+    @advert = current_user.adverts.new(params[:advert])
 
     respond_to do |format|
       if @advert.save
