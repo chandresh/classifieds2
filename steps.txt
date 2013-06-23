@@ -1,0 +1,6 @@
+gem "cancan"
+
+bundle
+
+rails g cancan:ability
+
