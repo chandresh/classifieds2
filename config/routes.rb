@@ -1,4 +1,6 @@
 Classifieds2::Application.routes.draw do
+  resources :adverts
+  root :to => 'adverts#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
